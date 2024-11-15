@@ -11,14 +11,21 @@ import {
   Node,
   Edge,
 } from '@xyflow/react';
-import { initialNodes, initialEdges } from './nodes';
 import '@xyflow/react/dist/style.css';
 import './index.css';
 
+// Interface for the layout options (vertical or horizontal layout)
 interface LayoutOptions {
   direction: 'TB' | 'LR'; // TB = Top to Bottom, LR = Left to Right
 }
 
+// Interface for props being passed into LayoutFlow component
+interface NodesEdgesProps {
+  initialNodes: Node[]; // Nodes to be passed to ReactFlow
+  initialEdges: Edge[];  // Edges to be passed to ReactFlow
+}
+
+// Function to layout the graph elements
 const getLayoutedElements = (nodes: Node[], edges: Edge[], options: LayoutOptions) => {
   const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   g.setGraph({ rankdir: options.direction });
@@ -47,14 +54,15 @@ const getLayoutedElements = (nodes: Node[], edges: Edge[], options: LayoutOption
   };
 };
 
-const LayoutFlow: React.FC = () => {
+// The LayoutFlow component accepts initial nodes and edges as props
+const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) => {
   const { fitView } = useReactFlow();
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
 
+  // Handle layout changes (Vertical or Horizontal)
   const onLayout = useCallback(
     (direction: 'TB' | 'LR') => {
-      console.log(nodes);
       const layouted = getLayoutedElements(nodes, edges, { direction });
 
       setNodes([...layouted.nodes]);
@@ -84,12 +92,22 @@ const LayoutFlow: React.FC = () => {
   );
 };
 
-const App: React.FC = () => {
+// The App component needs to pass initialNodes and initialEdges to the LayoutFlow
+interface AppProps {
+  initialNodes: Node[];
+  initialEdges: Edge[];
+}
+
+const App: React.FC<AppProps> = ({ initialNodes, initialEdges }) => {
+  console.log('Initial Nodes:', initialNodes);
+  console.log('Initial Edges:', initialEdges);
+
   return (
     <div style={{ height: 800 }}>
-        <ReactFlowProvider>
-            <LayoutFlow />
-        </ReactFlowProvider>
+      <ReactFlowProvider>
+        {/* Pass initialNodes and initialEdges to the LayoutFlow component */}
+        <LayoutFlow initialNodes={initialNodes} initialEdges={initialEdges} />
+      </ReactFlowProvider>
     </div>
   );
 };

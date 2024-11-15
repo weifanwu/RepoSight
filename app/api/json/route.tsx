@@ -1,20 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { convertFilesToNodesAndEdges } from '@/utils/convertToNodes';
 
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
-    const files = formData.getAll('files'); // Get all files with the key 'files'
 
-    // Iterate over each file and log its details
-    files.forEach((file, index) => {
-      if (file instanceof File) {
-        console.log(`File #${index + 1}:`);
-        console.log(`Name: ${file.name}`);
-        console.log("");
-      }
-    });
+    const files = formData.getAll('files').filter((entry): entry is File => entry instanceof File);
 
-    return NextResponse.json({ message: 'Files uploaded successfully' });
+    const nodesAndEdges = convertFilesToNodesAndEdges(files);
+
+
+    return NextResponse.json({ message: 'Files uploaded successfully', nodesAndEdges: nodesAndEdges});
   } catch (error) {
     console.error('Error processing upload:', error);
     return NextResponse.json({ message: 'File upload failed' }, { status: 500 });

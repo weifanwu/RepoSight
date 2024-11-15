@@ -5,7 +5,11 @@ interface UploadedFile extends File {
   webkitRelativePath: string;
 }
 
-export default function FolderUpload() {
+interface FolderUploadProps {
+  onUploadComplete: (nodes: any[], edges: any[]) => void; // Adjust this type as per your data
+}
+
+export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
 
@@ -29,6 +33,8 @@ export default function FolderUpload() {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        onUploadComplete(data.nodesAndEdges["nodes"], data.nodesAndEdges["edges"]);
         setUploadStatus("Files uploaded successfully!");
       } else {
         setUploadStatus("Failed to upload files.");
