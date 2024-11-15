@@ -2,12 +2,12 @@
 
 ## Description
 
-Repo Reader is a web application built with **Next.js** that allows users to upload a folder, convert its structure into a JSON format, and visualize the structure using **ReaFlow**. ReaFlow is a visualization tool that helps to render the folder structure dynamically. This app is ideal for users who want to analyze and visualize their project directory structures for better understanding or project management.
+Repo Reader is a web application built with **Next.js** that allows users to upload a folder, convert its structure into a JSON format, and visualize the structure using **React Flow**. React Flow is a visualization tool that helps to render the folder structure dynamically. This app is ideal for users who want to analyze and visualize their project directory structures for better understanding or project management.
 
 ### Features:
 1. **Upload Folders**: Allows users to upload folders to the application.
 2. **Convert Folder Structure to JSON**: Converts the folder structure into a JSON format for easy manipulation and analysis.
-3. **Render JSON using ReaFlow**: Renders the JSON representation of the folder structure using ReaFlow for visualization.
+3. **Render JSON using React Flow**: Renders the JSON representation of the folder structure using React Flow for visualization.
 
 ## Development Tools:
 
@@ -83,7 +83,7 @@ Follow these steps to set up and run the Repo Reader application:
 
 5. **Visualize the Folder Structure**:
 
-   After uploading the folder and converting the structure into JSON, the app will render the structure dynamically using **ReaFlow**.
+   After uploading the folder and converting the structure into JSON, the app will render the structure dynamically using **React Flow**.
 
 ## Troubleshooting
 
