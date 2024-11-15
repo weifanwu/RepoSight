@@ -4,9 +4,7 @@ import FolderUpload from "@/components/uploader/fileUploader";
 import Diagram from "@/components/flow_diagram/diagram";
 import { Node, Edge } from '@xyflow/react';
 
-interface PageProps {}
-
-const Page: React.FC<PageProps> = () => {
+const Page: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 

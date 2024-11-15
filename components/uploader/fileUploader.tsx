@@ -1,12 +1,13 @@
 "use client";
 import { useState, ChangeEvent } from "react";
+import { Node, Edge } from "@xyflow/react";
 
 interface UploadedFile extends File {
   webkitRelativePath: string;
 }
 
 interface FolderUploadProps {
-  onUploadComplete: (nodes: any[], edges: any[]) => void; // Adjust this type as per your data
+  onUploadComplete: (nodes: Node[], edges: Edge[]) => void;
 }
 
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
