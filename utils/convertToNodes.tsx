@@ -23,8 +23,13 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
   let yOffset = 0; // Y-offset for positioning
 
   files.forEach((file) => {
-    const pathParts = file.webkitRelativePath ? file.webkitRelativePath.split('/') : file.name.split('/');
-    
+    const pathParts = file.webkitRelativePath
+      ? file.webkitRelativePath.split('/')
+      : file.name.split('/');
+
+    // Exclude paths containing "node_modules"
+    if (pathParts.includes('node_modules')) return;
+
     pathParts.forEach((part, index) => {
       const nodeId = pathParts.slice(0, index + 1).join('/');
       

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, ChangeEvent } from "react";
 
 interface UploadedFile extends File {
@@ -15,7 +15,13 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
 
   const handleFolderUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
-    setFiles(selectedFiles);
+
+    // Exclude files from the "node_modules" directory
+    const filteredFiles = selectedFiles.filter(
+      (file) => !file.webkitRelativePath.includes("node_modules")
+    );
+
+    setFiles(filteredFiles);
   };
 
   const handleFileSubmit = async () => {
@@ -54,17 +60,13 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
         onChange={handleFolderUpload}
         style={{ marginBottom: "10px" }}
       />
-      <button onClick={handleFileSubmit}>Upload Files</button>
+      <button onClick={handleFileSubmit}>Create Diagram</button>
       <div>
-        <h3>Uploaded Files:</h3>
-        <ul>
-          {files.map((file, index) => (
-            <li key={index}>
-              {file.webkitRelativePath} - {file.size} bytes
-            </li>
-          ))}
-        </ul>
-        {uploadStatus && <p>{uploadStatus}</p>}
+        {uploadStatus && (
+          <div>
+            <p>{uploadStatus}</p>
+          </div>
+        )}
       </div>
     </div>
   );
