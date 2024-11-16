@@ -27,8 +27,8 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
       ? file.webkitRelativePath.split('/')
       : file.name.split('/');
 
-    // Exclude paths containing "node_modules"
-    if (pathParts.includes('node_modules')) return;
+    // Exclude paths containing "node_modules" or starting with "."
+    if (pathParts.some((part) => part.startsWith('.') || part === 'node_modules')) return;
 
     pathParts.forEach((part, index) => {
       const nodeId = pathParts.slice(0, index + 1).join('/');
