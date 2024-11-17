@@ -17,6 +17,7 @@ const Page: React.FC = () => {
   return (
     <div>
       {/* Pass the upload handler to the FolderUpload component */}
+      <h2>Upload and Visualize your github folder!</h2>
       <FolderUpload onUploadComplete={handleUploadComplete} />
 
       {nodes.length > 0 && edges.length > 0 && (
