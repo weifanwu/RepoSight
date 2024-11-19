@@ -102,25 +102,25 @@ Follow these steps to set up and run the Repo Reader application:
   npm install
   ```
 
-# Contributing Guidelines: Issue Priority Levels
+### Contributing Guidelines: Issue Priority Levels
 
-## **P0 (Critical)**
+1. **P0 (Critical)**
 - **Definition**: Requires **immediate action** due to major disruptions or system outages.
 - **Impact**: May result in severe downtime, data loss, or critical functionality being unusable.
 
-## **P1 (High)**
+2. **P1 (High)**
 - **Definition**: Significant issues needing **urgent attention** but not as critical as P0.
 - **Impact**: Can affect user experience or project timelines but do not cause immediate system failure.
 
-## **P2 (Medium)**
+3. **P2 (Medium)**
 - **Definition**: Important issues that should be resolved but can wait until higher-priority items are addressed.
 - **Impact**: Affects functionality but does not halt overall progress.
 
-## **P3 (Low)**
+4. **P3 (Low)**
 - **Definition**: Minor issues with little impact on the overall functionality of the software.
 - **Impact**: Can be scheduled for future releases without major disruption.
 
-## **P4 (Negligible)**
+5. **P4 (Negligible)**
 - **Definition**: Issues with minimal impact on users or functionality, often deferred to the backlog.
 - **Impact**: Low priority and considered only when time permits.
 
