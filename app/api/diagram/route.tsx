@@ -11,6 +11,8 @@ export async function POST(req: NextRequest) {
 
 
     return NextResponse.json({ message: 'Files uploaded successfully', nodesAndEdges: nodesAndEdges});
+
+    
   } catch (error) {
     console.error('Error processing upload:', error);
     return NextResponse.json({ message: 'File upload failed' }, { status: 500 });

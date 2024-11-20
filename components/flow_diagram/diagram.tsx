@@ -13,6 +13,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import './index.css';
+import { useTree } from '@/context/treeContext';
 
 // Interface for the layout options (vertical or horizontal layout)
 interface LayoutOptions {
@@ -107,13 +108,10 @@ interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ initialNodes, initialEdges }) => {
-  console.log('Initial Nodes:', initialNodes);
-  console.log('Initial Edges:', initialEdges);
-
+  const {tree} = useTree();
   return (
     <div style={{ height: 800 }}>
       <ReactFlowProvider>
-        {/* Pass initialNodes and initialEdges to the LayoutFlow component */}
         <LayoutFlow initialNodes={initialNodes} initialEdges={initialEdges} />
       </ReactFlowProvider>
     </div>
