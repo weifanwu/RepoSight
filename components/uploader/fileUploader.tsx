@@ -15,15 +15,40 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const {setTree} = useTree();
-  const handleFolderUpload = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFolderUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
 
-    // Exclude files from the "node_modules" directory
-    const filteredFiles = selectedFiles.filter(
-      (file) => !file.webkitRelativePath.includes("node_modules")
-    );
+    const readmeFiles: UploadedFile[] = [];
+    const filteredFiles = selectedFiles.filter((file) => {
+      const isReadme = file.name.toLowerCase() === "readme.md"; // Case-insensitive check for README.md
+      if (isReadme) {
+        readmeFiles.push(file);
+      }
+      return (
+        !file.webkitRelativePath.includes("node_modules") && !isReadme // Exclude node_modules and README files
+      );
+    });
 
-    setFiles(filteredFiles);
+    const readFileContent = (file: File): Promise<string> =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error("Failed to read file content"));
+        reader.readAsText(file);
+      });
+
+    try {
+      // Read README files asynchronously
+      const fileContents = await Promise.all(
+        readmeFiles.map((file) => readFileContent(file as File))
+      );
+
+      setFiles(filteredFiles);
+      setUploadStatus("Folder processed successfully!");
+    } catch (error) {
+      console.error("Error reading README files:", error);
+      setUploadStatus("Error processing folder.");
+    }
   };
 
   const handleFileSubmit = async () => {

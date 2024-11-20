@@ -13,7 +13,6 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import './index.css';
-import { useTree } from '@/context/treeContext';
 
 // Interface for the layout options (vertical or horizontal layout)
 interface LayoutOptions {
