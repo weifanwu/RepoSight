@@ -75,6 +75,13 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
     [nodes, edges, setNodes, setEdges, fitView],
   );
 
+  const onNodeClick = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      console.log('Node clicked:', node); // Replace this with your desired behavior
+    },
+    [],
+  );
+
   return (
     <ReactFlow
       style={{ width: '100%', height: '100vh' }}  // Use 100vh for full screen or specify another height
@@ -82,6 +89,7 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
       edges={edges}
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
+      onNodeClick={onNodeClick}
       fitView
     >
       <Panel position="top-right">
