@@ -108,7 +108,6 @@ interface AppProps {
 }
 
 const App: React.FC<AppProps> = ({ initialNodes, initialEdges }) => {
-  const {tree} = useTree();
   return (
     <div style={{ height: 800 }}>
       <ReactFlowProvider>

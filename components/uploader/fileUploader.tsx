@@ -14,7 +14,7 @@ interface FolderUploadProps {
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
-  const {tree, setTree} = useTree();
+  const {setTree} = useTree();
   const handleFolderUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
 
