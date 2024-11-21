@@ -1,14 +1,13 @@
 import { NextResponse } from 'next/server';
-import OpenAI from 'openai'; // Default import for OpenAI class
+import OpenAI from 'openai';
 
-// Initialize OpenAI with API Key
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY!,
 });
 
 interface OpenAIRequestBody {
   prompt: string;
-  model?: string; // Optional, defaults to "gpt-3.5-turbo"
+  model?: string;
 }
 
 export async function POST(req: Request) {

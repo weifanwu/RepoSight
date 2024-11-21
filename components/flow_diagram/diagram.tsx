@@ -81,7 +81,7 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
     const fileName = fileNames[fileNames.length - 1];
     const children = [...(tree.get(fileName) || [])].join(' ');
     const prompt = JSON.stringify({
-      prompt: `Use the information below to infer the functionality of this folder ${fileName} in one paragraph, limited to 100 words, make sure your answer connects to the overall project and include the folder name. Readme file: ${text}, children files and folder names: ${children}`,
+      prompt: `Use the information below to infer the functionality of this folder called:  "${fileName}" in one paragraph, limited to 100 words, make sure your answer connects to the overall project and include the folder name. Readme file: ${text}, children files and folder names: ${children}`,
     });
 
     fetch('/api/ai/reader', {
