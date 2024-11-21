@@ -32,10 +32,10 @@ export async function POST(req: Request) {
     const completion = response.choices[0]?.message?.content;
 
     return NextResponse.json({ message: completion });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error interacting with OpenAI API:', error);
     return NextResponse.json(
-      { error: 'Failed to process the request.', details: error.message || '' },
+      { error: 'Failed to process the request.' },
       { status: 500 }
     );
   }
