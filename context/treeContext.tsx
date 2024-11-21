@@ -15,7 +15,7 @@ interface FileTreeContextValue {
 const FileTreeContext = createContext<FileTreeContextValue | undefined>(undefined);
 
 // Provide the TreeContext to the app
-export const TreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const FileTreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [tree, setTreeState] = useState<Tree>(new Map());
     const [text, setTextState] = useState<String>("");
 

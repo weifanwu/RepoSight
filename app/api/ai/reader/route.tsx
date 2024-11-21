@@ -24,8 +24,6 @@ export async function POST(req: Request) {
       );
     }
 
-    console.log(model);
-
     const response = await openai.chat.completions.create({
       model,
       messages: [{ role: 'user', content: prompt }],
