@@ -75,12 +75,37 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
     [nodes, edges, setNodes, setEdges, fitView],
   );
 
-  const onNodeClick = useCallback(
-    (event: React.MouseEvent, node: Node) => {
-      console.log('Node clicked:', node); // Replace this with your desired behavior
-    },
-    [],
-  );
+  const onNodeClick = (event: React.MouseEvent, node: Node) => {
+
+    
+
+    // fetch("/api/diagram", {
+    //   method: "POST",
+    //   body: formData, // Make sure formData is initialized correctly.
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       console.error("Failed to fetch data from /api/diagram");
+    //       return;
+    //     }
+    //     return response.json();
+    //   })
+    //   .then((data) => {
+    //     // Assuming data.nodesAndEdges.serializableTree is an array of key-value pairs.
+    //     const serializableTree = data.nodesAndEdges.serializableTree;
+    //     const tree: Tree = new Map();
+  
+    //     for (const [key, value] of serializableTree) {
+    //       tree.set(key, new Set(value));
+    //     }
+  
+    //     console.log("Tree:", tree); // For debugging purposes.
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error in onNodeClick:", error);
+    //   });
+  };
+  
 
   return (
     <ReactFlow

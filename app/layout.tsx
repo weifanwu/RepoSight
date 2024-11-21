@@ -1,7 +1,7 @@
 // app/layout.tsx
 import './globals.css';
 import { ReactNode } from 'react';
-import { TreeProvider } from '../context/treeContext';  // Import the TreeProvider
+import { FileTreeProvider } from '../context/treeContext';  // Import the TreeProvider
 
 export const metadata = {
   title: 'Folder Upload App',
@@ -12,9 +12,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <TreeProvider>
+        <FileTreeProvider>
           {children} {/* The context is now available to all child components */}
-        </TreeProvider>
+        </FileTreeProvider>
       </body>
     </html>
   );

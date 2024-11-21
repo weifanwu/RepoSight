@@ -14,7 +14,7 @@ interface FolderUploadProps {
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
-  const {setTree} = useTree();
+  const {setTree, setText} = useTree();
   const handleFolderUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
 
@@ -38,11 +38,11 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       });
 
     try {
-      // Read README files asynchronously
+
       const fileContents = await Promise.all(
         readmeFiles.map((file) => readFileContent(file as File))
       );
-
+      setText(fileContents.join());
       setFiles(filteredFiles);
       setUploadStatus("Folder processed successfully!");
     } catch (error) {

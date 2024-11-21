@@ -1,12 +1,44 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
+import OpenAI from 'openai'; // Default import for OpenAI class
 
-export async function GET(req: NextRequest) {
+// Initialize OpenAI with API Key
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY!,
+});
+
+interface OpenAIRequestBody {
+  prompt: string;
+  model?: string; // Optional, defaults to "gpt-3.5-turbo"
+}
+
+export async function POST(req: Request) {
   try {
+    const body: OpenAIRequestBody = await req.json();
 
-    return NextResponse.json({ message: 'Files uploaded successfully', content: "repo is used to do some machine learning training"});
+    const { prompt, model = 'gpt-4o-mini' } = body;
 
-  } catch (error) {
-    console.error('Error processing upload:', error);
-    return NextResponse.json({ message: 'File upload failed' }, { status: 500 });
+    if (!prompt || typeof prompt !== 'string') {
+      return NextResponse.json(
+        { error: 'Invalid or missing "prompt" in request body.' },
+        { status: 400 }
+      );
+    }
+
+    console.log(model);
+
+    const response = await openai.chat.completions.create({
+      model,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    const completion = response.choices[0]?.message?.content;
+
+    return NextResponse.json({ message: completion });
+  } catch (error: any) {
+    console.error('Error interacting with OpenAI API:', error);
+    return NextResponse.json(
+      { error: 'Failed to process the request.', details: error.message || '' },
+      { status: 500 }
+    );
   }
 }
