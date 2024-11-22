@@ -1,9 +1,6 @@
 "use client"
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// Define the tree structure type
-
-// Context value type
 interface FileTreeContextValue {
   tree: Tree;
   text: String;
@@ -13,10 +10,8 @@ interface FileTreeContextValue {
   setApiKey: (newKey: String) => void;
 }
 
-// Create the TreeContext
 const FileTreeContext = createContext<FileTreeContextValue | undefined>(undefined);
 
-// Provide the TreeContext to the app
 export const FileTreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [tree, setTreeState] = useState<Tree>(new Map());
     const [text, setTextState] = useState<String>("");
@@ -37,7 +32,6 @@ export const FileTreeProvider: React.FC<{ children: ReactNode }> = ({ children }
   );
 };
 
-// Custom hook to use the TreeContext
 export const useTree = () => {
   const context = useContext(FileTreeContext);
   if (!context) {

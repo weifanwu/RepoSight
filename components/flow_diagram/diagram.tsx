@@ -57,8 +57,8 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>(initialEdges);
   const { text, tree } = useTree();
 
-  const [popupContent, setPopupContent] = useState<string | null>(null); // Popup content
-  const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null); // Popup position
+  const [popupContent, setPopupContent] = useState<string | null>(null);
+  const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
 
   const onLayout = useCallback(
     (direction: 'TB' | 'LR') => {
@@ -75,7 +75,7 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
   );
 
   const onNodeClick = (event: React.MouseEvent, node: Node) => {
-    event.preventDefault(); // Prevent default behavior
+    event.preventDefault();
 
     const fileNames = node.id.split('/');
     const fileName = fileNames[fileNames.length - 1];
@@ -141,10 +141,10 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
             padding: '10px',
             zIndex: 1000,
             boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-            maxWidth: '300px', // Sets a maximum width
-            minWidth: '200px', // Ensures the popup isn't too narrow
-            width: 'auto',      // Allows the width to adjust based on content
-            wordWrap: 'break-word', // Prevents long words from overflowing
+            maxWidth: '300px',
+            minWidth: '200px',
+            width: 'auto',
+            wordWrap: 'break-word',
           }}
         >
           <p>{popupContent}</p>

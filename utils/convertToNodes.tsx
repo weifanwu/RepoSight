@@ -3,8 +3,8 @@ import { MarkerType, Node, Edge } from '@xyflow/react';
 export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edges: Edge[]; serializableTree: [string, string[]][] } {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
-  const nodeIds = new Set<string>(); // Track unique node IDs
-  let yOffset = 0; // Y-offset for positioning
+  const nodeIds = new Set<string>();
+  let yOffset = 0;
   const tree: Map<string, Set<string>> = new Map();
 
   for (let i = 0; i < files.length; i++) {
@@ -13,7 +13,6 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
       ? file.webkitRelativePath.split('/')
       : file.name.split('/');
   
-    // Exclude paths containing "node_modules" or starting with "."
     if (pathParts.some((part) => part.startsWith('.') || part === 'node_modules')) {
       continue;
     }
@@ -22,7 +21,7 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
       const part = pathParts[index];
       const nodeId = pathParts.slice(0, index + 1).join('/');
       if (!tree.has(part)) {
-        tree.set(part, new Set<string>()); // Initialize an empty Set if the node doesn't exist
+        tree.set(part, new Set<string>());
       }
       
       const children = pathParts.slice(index + 1);
@@ -31,7 +30,6 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
       if (!nodeIds.has(nodeId)) {
         nodeIds.add(nodeId);
   
-        // Determine label and position
         const isFolder = index < pathParts.length - 1;
         const label = isFolder ? `Folder: ${part}` : `File: ${part}`;
   
@@ -39,7 +37,7 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
           id: nodeId,
           data: { label },
           position: { x: index * 200, y: yOffset },
-          type: isFolder ? 'default' : 'output', // Folder or file node type
+          type: isFolder ? 'default' : 'output',
         };
   
         nodes.push(node);
@@ -54,7 +52,7 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
             markerEnd: { type: MarkerType.Arrow },
           });
         }
-        yOffset += 100; // Increment position for each new node
+        yOffset += 100;
       }
     }
   }

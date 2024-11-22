@@ -1,4 +1,3 @@
-// components/ApiKeyPopup.tsx
 import React, { useState } from "react";
 import { useTree } from "@/context/treeContext";
 
@@ -7,8 +6,8 @@ const ApiKeyPopup: React.FC = () => {
   const [key, setKey] = useState("");
 
   const handleSave = () => {
-    setApiKey(key); // Save the key to context
-    setKey(""); // Clear the input
+    setApiKey(key);
+    setKey("");
   };
 
   return (

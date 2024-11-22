@@ -20,12 +20,12 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
 
     const readmeFiles: UploadedFile[] = [];
     const filteredFiles = selectedFiles.filter((file) => {
-      const isReadme = file.name.toLowerCase() === "readme.md"; // Case-insensitive check for README.md
+      const isReadme = file.name.toLowerCase() === "readme.md";
       if (isReadme) {
         readmeFiles.push(file);
       }
       return (
-        !file.webkitRelativePath.includes("node_modules") && !isReadme // Exclude node_modules and README files
+        !file.webkitRelativePath.includes("node_modules") && !isReadme
       );
     });
 
@@ -54,7 +54,6 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const handleFileSubmit = async () => {
     const formData = new FormData();
 
-    // Append each file to the FormData
     files.forEach((file) => {
       formData.append("files", file, file.webkitRelativePath);
     });
