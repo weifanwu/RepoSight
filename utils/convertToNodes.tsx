@@ -1,19 +1,4 @@
-import { MarkerType } from '@xyflow/react';
-
-type Node = {
-  id: string;
-  data: { label: string };
-  position: { x: number; y: number };
-  type?: string;
-};
-
-type Edge = {
-  id: string;
-  source: string;
-  target: string;
-  animated?: boolean;
-  markerEnd?: { type: MarkerType };
-};
+import { MarkerType, Node, Edge } from '@xyflow/react';
 
 export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edges: Edge[]; serializableTree: [string, string[]][] } {
   const nodes: Node[] = [];
