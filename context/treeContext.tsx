@@ -7,8 +7,10 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 interface FileTreeContextValue {
   tree: Tree;
   text: String;
+  apiKey: String;
   setTree: (newTree: Tree) => void;
   setText: (newText: String) => void;
+  setApiKey: (newKey: String) => void;
 }
 
 // Create the TreeContext
@@ -18,6 +20,7 @@ const FileTreeContext = createContext<FileTreeContextValue | undefined>(undefine
 export const FileTreeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [tree, setTreeState] = useState<Tree>(new Map());
     const [text, setTextState] = useState<String>("");
+    const [apiKey, setApiKey] = useState<String>("");
 
   const setTree = (newTree: Tree) => {
     setTreeState(newTree);
@@ -28,7 +31,7 @@ export const FileTreeProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   return (
-    <FileTreeContext.Provider value={{ text, tree, setTree, setText }}>
+    <FileTreeContext.Provider value={{ apiKey, text, tree, setTree, setText, setApiKey }}>
       {children}
     </FileTreeContext.Provider>
   );
