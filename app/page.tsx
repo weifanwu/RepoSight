@@ -1,5 +1,5 @@
 "use client";
-import { useTree } from "@/context/treeContext";
+// import { useTree } from "@/context/treeContext";
 import FolderUpload from "@/components/uploader/fileUploader";
 import Diagram from "@/components/flow_diagram/diagram";
 // import ApiKeyPopup from "@/components/openai/apiKeyPopup";
