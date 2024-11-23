@@ -72,7 +72,6 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
           tree.set(key, new Set(value));
         }
         setTree(tree);
-        console.log(data.nodesAndEdges);
         onUploadComplete(data.nodesAndEdges["nodes"], data.nodesAndEdges["edges"]);
         setUploadStatus("Files uploaded successfully!");
       } else {
@@ -85,11 +84,9 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen bg-grey-lighter">
       <FolderInput
         handleFolderUpload={handleFolderUpload}
         FolderInputStatus={uploadStatus}
       />
-    </div>
   );
 }

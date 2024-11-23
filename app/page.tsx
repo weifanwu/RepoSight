@@ -12,8 +12,8 @@ const Page: React.FC = () => {
   const [edges, setEdges] = useState<Edge[]>([]);
   // const { apiKey } = useTree();
 
-  const handleSearch = (query: string) => {
-    console.log("searching..." + query);
+  const handleSearch = () => {
+    console.log("searching...");
   };
 
   // Generate JSON file for download

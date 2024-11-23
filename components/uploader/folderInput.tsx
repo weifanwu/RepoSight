@@ -10,10 +10,10 @@ const FolderInput: React.FC<FolderInputProps> = ({
   FolderInputStatus,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen bg-grey-lighter">
+    <div className="fixed flex flex-col items-center justify-center bg-gray mt-20 ml-4 z-50">
       <label
         htmlFor="folder-upload"
-        className="flex flex-col items-center w-64 px-4 py-6 text-blue bg-white border border-blue rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:text-white tracking-wide uppercase"
+        className="flex flex-col items-center w-50 px-4 py-6 text-blue bg-white border border-blue rounded-lg shadow-lg cursor-pointer hover:bg-blue hover:text-white tracking-wide uppercase"
       >
         <svg
           className="w-8 h-8"

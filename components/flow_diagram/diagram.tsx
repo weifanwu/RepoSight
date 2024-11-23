@@ -1,6 +1,6 @@
 "use client";
 import Dagre from '@dagrejs/dagre';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -62,6 +62,11 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
 
   const [popupContent, setPopupContent] = useState<string | null>(null);
   const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  }, [initialNodes, initialEdges, setNodes, setEdges]);
 
   const onLayout = useCallback(
     (direction: 'TB' | 'LR') => {

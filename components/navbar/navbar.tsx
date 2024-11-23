@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FiDownload } from "react-icons/fi";
 
 interface NavbarProps {
   onSearch: (query: string) => void;
@@ -15,13 +14,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, onDownload }) => {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-gray-100 px-6 py-3 border-b shadow-sm">
-      {/* Left Section: Title */}
+    <nav className="fixed w-full flex items-center justify-between bg-gray-100 px-6 py-3 border-b shadow-sm z-50">
       <div className="flex items-center gap-4">
         <h1 className="text-xl font-semibold text-gray-800">Repo Reader</h1>
       </div>
 
-      {/* Center Section: Search */}
       <div className="flex-1 mx-8">
         <input
           type="text"
@@ -32,14 +29,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, onDownload }) => {
         />
       </div>
 
-      {/* Right Section: Download Button */}
       <div className="flex items-center">
-        <button
-          onClick={onDownload}
-          className="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:ring focus:ring-blue-300"
-        >
-          <FiDownload className="mr-2" />
-          Download
+        <button 
+          className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+          onClick={onDownload}>
+          <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg>
+          <span>Download</span>
         </button>
       </div>
     </nav>
