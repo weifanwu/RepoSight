@@ -3,8 +3,9 @@ import { convertFilesToNodesAndEdges } from '@/utils/convertToNodes';
 
 export const config = {
   api: {
+    responseLimit: false,
     bodyParser: {
-      sizeLimit: '10mb',
+      sizeLimit: false,
     },
   },
 };
