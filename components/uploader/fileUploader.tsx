@@ -42,7 +42,6 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       );
       setText(fileContents.join());
 
-      // Automatically submit files after processing
       await handleFileSubmit(filteredFiles);
     } catch (error) {
       console.error("Error reading README files:", error);
