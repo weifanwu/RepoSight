@@ -10,16 +10,10 @@ import Navbar from "@/components/navbar/navbar";
 const Page: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
-  const [_, setFilteredNodes] = useState<Node[]>([]);
   // const { apiKey } = useTree();
 
   const handleSearch = (query: string) => {
-    if (!query) {
-      setFilteredNodes(nodes); // Reset to all nodes if query is empty
-    } else {
-
-      setFilteredNodes([]);
-    }
+    console.log("searching..." + query);
   };
 
   // Generate JSON file for download
