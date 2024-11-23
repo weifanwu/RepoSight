@@ -8,6 +8,9 @@ import {
   useNodesState,
   useEdgesState,
   useReactFlow,
+  Background,
+  BackgroundVariant,
+  MiniMap,
   Node,
   Edge,
 } from '@xyflow/react';
@@ -123,6 +126,14 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
         onNodeClick={onNodeClick}
         fitView
       >
+        <MiniMap zoomable pannable  />
+        <Background
+          id="1"
+          gap={50}
+          color="#f1f1f1"
+          variant={BackgroundVariant.Lines}
+        />
+
         <Panel position="top-right">
           <button onClick={() => onLayout('TB')}>Vertical Layout</button>
           <button onClick={() => onLayout('LR')}>Horizontal Layout</button>

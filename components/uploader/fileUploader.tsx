@@ -1,6 +1,7 @@
 "use client";
 import { useState, ChangeEvent } from "react";
 import { Node, Edge } from "@xyflow/react";
+import FolderInput from "./folderInput";
 import { useTree } from "@/context/treeContext";
 
 interface UploadedFile extends File {
@@ -12,9 +13,9 @@ interface FolderUploadProps {
 }
 
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
-  const [files, setFiles] = useState<UploadedFile[]>([]);
   const [uploadStatus, setUploadStatus] = useState<string>("");
-  const {setTree, setText} = useTree();
+  const { setTree, setText } = useTree();
+
   const handleFolderUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
 
@@ -24,9 +25,7 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       if (isReadme) {
         readmeFiles.push(file);
       }
-      return (
-        !file.webkitRelativePath.includes("node_modules") && !isReadme
-      );
+      return !file.webkitRelativePath.includes("node_modules") && !isReadme;
     });
 
     const readFileContent = (file: File): Promise<string> =>
@@ -38,20 +37,21 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       });
 
     try {
-
       const fileContents = await Promise.all(
         readmeFiles.map((file) => readFileContent(file as File))
       );
       setText(fileContents.join());
-      setFiles(filteredFiles);
-      setUploadStatus("Folder processed successfully!");
+
+      // Automatically submit files after processing
+      await handleFileSubmit(filteredFiles);
     } catch (error) {
       console.error("Error reading README files:", error);
       setUploadStatus("Error processing folder.");
     }
   };
 
-  const handleFileSubmit = async () => {
+  const handleFileSubmit = async (files: UploadedFile[]) => {
+    setUploadStatus("Submitting files...");
     const formData = new FormData();
 
     files.forEach((file) => {
@@ -72,6 +72,7 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
           tree.set(key, new Set(value));
         }
         setTree(tree);
+        console.log(data.nodesAndEdges);
         onUploadComplete(data.nodesAndEdges["nodes"], data.nodesAndEdges["edges"]);
         setUploadStatus("Files uploaded successfully!");
       } else {
@@ -84,22 +85,11 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   };
 
   return (
-    <div>
-      <input
-        type="file"
-        webkitdirectory="true"
-        multiple
-        onChange={handleFolderUpload}
-        style={{ marginBottom: "10px" }}
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-grey-lighter">
+      <FolderInput
+        handleFolderUpload={handleFolderUpload}
+        FolderInputStatus={uploadStatus}
       />
-      <button onClick={handleFileSubmit}>Create Diagram</button>
-      <div>
-        {uploadStatus && (
-          <div>
-            <p>{uploadStatus}</p>
-          </div>
-        )}
-      </div>
     </div>
   );
 }
