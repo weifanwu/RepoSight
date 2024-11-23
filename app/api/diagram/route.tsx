@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { convertFilesToNodesAndEdges } from '@/utils/convertToNodes';
 
-export const config = {
-  api: {
-    responseLimit: false,
-    bodyParser: false,
-  },
-};
-
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();
