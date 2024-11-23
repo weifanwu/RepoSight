@@ -2,14 +2,14 @@
 import { useTree } from "@/context/treeContext";
 import FolderUpload from "@/components/uploader/fileUploader";
 import Diagram from "@/components/flow_diagram/diagram";
-import ApiKeyPopup from "@/components/openai/apiKeyPopup";
+// import ApiKeyPopup from "@/components/openai/apiKeyPopup";
 import { Node, Edge } from "@xyflow/react";
 import React, { useState } from "react";
 
 const Page: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
-  const { apiKey } = useTree();
+  // const { apiKey } = useTree();
 
   const handleUploadComplete = (uploadedNodes: Node[], uploadedEdges: Edge[]) => {
     setNodes(uploadedNodes);
