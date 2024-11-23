@@ -12,8 +12,8 @@ const Page: React.FC = () => {
   const [edges, setEdges] = useState<Edge[]>([]);
   // const { apiKey } = useTree();
 
-  const handleSearch = (query: string) => {
-    console.log("searching..." + query);
+  const handleSearch = () => {
+    console.log("searching...");
   };
 
   // Generate JSON file for download
@@ -35,7 +35,7 @@ const Page: React.FC = () => {
         <>
         <Navbar onSearch={handleSearch} onDownload={handleDownload} />
         <FolderUpload onUploadComplete={handleUploadComplete} />
-          {nodes.length > 0 && edges.length > 0 && <Diagram initialNodes={nodes} initialEdges={edges} />}
+         <Diagram initialNodes={nodes} initialEdges={edges} />
         </>
       {/* )} */}
     </div>
