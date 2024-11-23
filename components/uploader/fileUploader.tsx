@@ -61,6 +61,9 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       const response = await fetch("/api/diagram", {
         method: "POST",
         body: formData,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (response.ok) {
