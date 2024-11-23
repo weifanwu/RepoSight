@@ -16,16 +16,18 @@ const Page: React.FC = () => {
     setEdges(uploadedEdges);
   };
 
+
+  // todo: add api key popup so the user can input their api key
   return (
     <div>
-      {!apiKey && <ApiKeyPopup />}
-      {apiKey && (
+      {/* {!apiKey && <ApiKeyPopup />}
+      {apiKey && ( */}
         <>
           <h2>Upload and Visualize your GitHub folder!</h2>
           <FolderUpload onUploadComplete={handleUploadComplete} />
           {nodes.length > 0 && edges.length > 0 && <Diagram initialNodes={nodes} initialEdges={edges} />}
         </>
-      )}
+      {/* )} */}
     </div>
   );
 };
