@@ -66,7 +66,7 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
   useEffect(() => {
     setNodes(initialNodes);
     setEdges(initialEdges);
-  }, [initialNodes, initialEdges, setNodes, setEdges]);
+  }, [initialNodes, initialEdges]);
 
   const onLayout = useCallback(
     (direction: 'TB' | 'LR') => {
@@ -129,9 +129,10 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onNodeClick={onNodeClick}
+        defaultViewport={{x: 0, y: 0, zoom: 1}}
         fitView
       >
-        <MiniMap zoomable pannable  />
+        <MiniMap nodeColor="#6ede87" zoomable pannable  />
         <Background
           id="1"
           gap={50}
@@ -139,9 +140,29 @@ const LayoutFlow: React.FC<NodesEdgesProps> = ({ initialNodes, initialEdges }) =
           variant={BackgroundVariant.Lines}
         />
 
-        <Panel position="top-right">
-          <button onClick={() => onLayout('TB')}>Vertical Layout</button>
-          <button onClick={() => onLayout('LR')}>Horizontal Layout</button>
+        <Panel 
+          position='top-right'
+          style={{ marginTop: '100px' }}
+          >
+<div className="flex flex-col items-center">
+  {/* Top Button */}
+  <button 
+    onClick={() => onLayout('TB')} 
+    className="bg-blue-300 hover:bg-blue-400 text-gray-700 font-bold py-2 px-10 rounded w-40"
+  >
+    Vertical
+  </button>
+
+  {/* Bottom Button */}
+  <button 
+    onClick={() => onLayout('LR')} 
+    className="bg-green-300 hover:bg-green-400 text-gray-700 font-bold py-2 px-10 rounded w-40"
+  >
+    Horizontal
+  </button>
+</div>
+
+
         </Panel>
       </ReactFlow>
 

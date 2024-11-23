@@ -35,7 +35,7 @@ const Page: React.FC = () => {
         <>
         <Navbar onSearch={handleSearch} onDownload={handleDownload} />
         <FolderUpload onUploadComplete={handleUploadComplete} />
-          {nodes.length > 0 && edges.length > 0 && <Diagram initialNodes={nodes} initialEdges={edges} />}
+         <Diagram initialNodes={nodes} initialEdges={edges} />
         </>
       {/* )} */}
     </div>
