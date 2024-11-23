@@ -51,16 +51,15 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
 
   const handleFileSubmit = async (files: UploadedFile[]) => {
     setUploadStatus("Submitting files...");
-    const formData = new FormData();
+    const filePaths = files.map((file) => file.webkitRelativePath);
 
-    files.forEach((file) => {
-      formData.append("files", file, file.webkitRelativePath);
-    });
+
+    
 
     try {
       const response = await fetch("/api/diagram", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify({ filePaths }),
       });
 
       if (response.ok) {

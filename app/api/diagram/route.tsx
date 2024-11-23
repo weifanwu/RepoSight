@@ -3,15 +3,14 @@ import { convertFilesToNodesAndEdges } from '@/utils/convertToNodes';
 
 export async function POST(req: NextRequest) {
   try {
-    const formData = await req.formData();
+    const body = await req.json();
+    const filePaths: string[] = body.filePaths;
 
-    const files = formData.getAll('files').filter((entry): entry is File => entry instanceof File);
-
-    if (files.length === 0) {
-      return NextResponse.json({ message: 'No files provided' }, { status: 400 });
+    if (!filePaths || filePaths.length === 0) {
+      return NextResponse.json({ message: "No file paths provided" }, { status: 400 });
     }
 
-    const nodesAndEdges = convertFilesToNodesAndEdges(files);
+    const nodesAndEdges = convertFilesToNodesAndEdges(filePaths);
 
     return NextResponse.json({
       message: 'Files uploaded successfully',

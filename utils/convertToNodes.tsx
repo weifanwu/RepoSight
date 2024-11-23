@@ -1,6 +1,6 @@
 import { MarkerType, Node, Edge } from '@xyflow/react';
 
-export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edges: Edge[]; serializableTree: [string, string[]][] } {
+export function convertFilesToNodesAndEdges(files: string[]): { nodes: Node[]; edges: Edge[]; serializableTree: [string, string[]][] } {
   const nodes: Node[] = [];
   const edges: Edge[] = [];
   const nodeIds = new Set<string>();
@@ -9,9 +9,7 @@ export function convertFilesToNodesAndEdges(files: File[]): { nodes: Node[]; edg
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
-    const pathParts = file.webkitRelativePath
-      ? file.webkitRelativePath.split('/')
-      : file.name.split('/');
+    const pathParts = file.split('/');
   
     if (pathParts.some((part) => part.startsWith('.') || part === 'node_modules')) {
       continue;
