@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@dagrejs/dagre": "^1.1.4",
+    "@upstash/redis": "^1.34.3",
     "@xyflow/react": "^12.3.5",
     "formidable": "^3.5.2",
     "next": "15.0.3",
