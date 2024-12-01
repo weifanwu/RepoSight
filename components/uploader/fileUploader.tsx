@@ -21,11 +21,13 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
 
     const readmeFiles: UploadedFile[] = [];
     const filteredFiles = selectedFiles.filter((file) => {
+      const isInNodeModules = file.webkitRelativePath.includes("node_modules");
       const isReadme = file.name.toLowerCase() === "readme.md";
-      if (isReadme) {
+
+      if (isReadme && !isInNodeModules) {
         readmeFiles.push(file);
       }
-      return !file.webkitRelativePath.includes("node_modules") && !isReadme;
+      return !isInNodeModules && !isReadme;
     });
 
     const readFileContent = (file: File): Promise<string> =>
@@ -53,9 +55,6 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
     setUploadStatus("Submitting files...");
     const filePaths = files.map((file) => file.webkitRelativePath);
 
-
-    
-
     try {
       const response = await fetch("/api/diagram", {
         method: "POST",
@@ -82,9 +81,9 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   };
 
   return (
-      <FolderInput
-        handleFolderUpload={handleFolderUpload}
-        FolderInputStatus={uploadStatus}
-      />
+    <FolderInput
+      handleFolderUpload={handleFolderUpload}
+      FolderInputStatus={uploadStatus}
+    />
   );
 }

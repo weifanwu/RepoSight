@@ -20,7 +20,6 @@ export async function POST(req: Request) {
   try {
     const body: OpenAIRequestBody = await req.json();
     const { prompt, model = 'gpt-4o-mini' } = body;
-
     if (!prompt || typeof prompt !== 'string') {
       return NextResponse.json(
         { error: 'Invalid or missing "prompt" in request body.' },
