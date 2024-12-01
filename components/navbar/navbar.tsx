@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch, onDownload }) => {
   return (
     <nav className="fixed w-full flex items-center justify-between bg-gray-100 px-6 py-3 border-b shadow-sm z-50">
       <div className="flex items-center gap-4">
-        <h1 className="text-xl font-semibold text-gray-800">Repo Reader</h1>
+        <h1 className="text-xl font-semibold text-gray-800">RepoSight</h1>
       </div>
 
       <div className="flex-1 mx-8">
