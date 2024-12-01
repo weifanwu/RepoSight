@@ -35,6 +35,14 @@ Follow these steps to set up and run the Repo Reader application:
 
 2. **Yarn (Optional)**: You can use Yarn as an alternative to npm if you prefer. Install it from [here](https://yarnpkg.com/getting-started/install).
 
+## Environment Variables
+Before running the application, ensure you have the necessary environment variables set in a .env.local file. Create this file in the root directory of your project and add the following variables:
+
+   ```bash
+   REDIS_URL=<your-redis-url>
+   REDIS_TOKEN=<your-redis-token>
+   OPENAI_API_KEY=<your-openai-api-key>
+   ```
 ## Installation
 
 > **Note**: This project requires the `--legacy-peer-deps` flag when installing dependencies due to compatibility issues.
