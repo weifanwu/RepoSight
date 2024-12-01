@@ -1,13 +1,16 @@
-# Repo Reader
+# RepoSight
 
-## Description
+This RepoSight provides a user-friendly way to explore large GitHub repositories, enabling developers to quickly understand the structure and purpose of the codebase. It combines interactive visualization and AI-assisted summaries to make onboarding easier for new developers.
 
-Repo Reader is a web application built with **Next.js** that allows users to upload a folder, convert its structure into a JSON format, and visualize the structure using **React Flow**. React Flow is a visualization tool that helps to render the folder structure dynamically. This app is ideal for users who want to analyze and visualize their project directory structures for better understanding or project management.
+## Features
+- **Repo Visualization**: View a graphical representation of the repository using React Flow.
+- **AI Summaries**: Click on folder names to get instant AI-generated summaries of their contents.
+- **Quick Navigation**: Simplifies exploring complex repository structures.
 
-### Features:
-1. **Upload Folders**: Allows users to upload folders to the application.
-2. **Convert Folder Structure to JSON**: Converts the folder structure into a JSON format for easy manipulation and analysis.
-3. **Render JSON using React Flow**: Renders the JSON representation of the folder structure using React Flow for visualization.
+## Built With
+- **React Flow**: For interactive repository visualization.
+- **Next.js**: As the main framework.
+- **Node.js**: Requires Node.js v21.5.0.
 
 ## Development Tools:
 
@@ -32,77 +35,61 @@ Follow these steps to set up and run the Repo Reader application:
 
 2. **Yarn (Optional)**: You can use Yarn as an alternative to npm if you prefer. Install it from [here](https://yarnpkg.com/getting-started/install).
 
-### Steps to Run the App:
+## Installation
 
-1. **Clone the repository**:
+> **Note**: This project requires the `--legacy-peer-deps` flag when installing dependencies due to compatibility issues.
 
+1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo-name/repo-reader.git
-   cd repo-reader
+   git clone https://github.com/<your-username>/<repo-name>.git  
+   cd <repo-name>
    ```
 
-2. **Install dependencies**:
-
-   Run the following command to install the required dependencies:
-
+2. Install dependencies:
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
 
-   Or, if you're using Yarn:
-
-   ```bash
-   yarn install
-   ```
-
-3. **Run the application**:
-
-   To start the development server, use the following command:
-
+3. Run the development server:
    ```bash
    npm run dev
    ```
 
-   Or with Yarn:
+Open http://localhost:3000 to view the application in your browser.
 
-   ```bash
-   yarn dev
-   ```
+## How to Contribute
 
-   The application will now be available at:
+We welcome contributions to enhance the functionality of this project! Follow the steps below to get started.
 
-   ```
-   http://localhost:3000
-   ```
+1. Fork the repository
 
-4. **Upload a Folder**:
+Start by forking the repository to your own GitHub account.
 
-   - Go to the main page of the app.
-   - Use the upload functionality to select and upload a folder from your local machine.
-   - The app will process the folder structure and display it in JSON format.
+2. Create a new branch for your feature or bug fix
 
-5. **Visualize the Folder Structure**:
+Once you've forked the repository, create a new branch for your changes:
 
-   After uploading the folder and converting the structure into JSON, the app will render the structure dynamically using **React Flow**.
+```bash
+git checkout -b <feature-branch-name>
+```
 
-## Troubleshooting
+3. Commit your changes with a clear message
 
-- If you encounter issues related to the Node.js version, make sure to check your version using:
+After making your changes, commit them with a clear and concise message that describes what you've done:
 
-  ```bash
-  node -v
-  ```
+```bash
+git commit -m "Description of changes"
+```
 
-  If the version is incorrect, switch to the correct one using `nvm`.
+4. Push to your branch
 
-- If there are any missing dependencies or build issues, try deleting `node_modules` and the `package-lock.json` file, then reinstall the dependencies:
+Push your changes to the newly created branch on your forked repository:
 
-  ```bash
-  rm -rf node_modules package-lock.json
-  npm install
-  ```
+```bash
+git push origin <feature-branch-name>
+```
 
-### Contributing Guidelines: Issue Priority Levels
+## Contributing Guidelines: Issue Priority Levels
 
 1. **P0 (Critical)**
 - **Definition**: Requires **immediate action** due to major disruptions or system outages.
@@ -124,4 +111,4 @@ Follow these steps to set up and run the Repo Reader application:
 - **Definition**: Issues with minimal impact on users or functionality, often deferred to the backlog.
 - **Impact**: Low priority and considered only when time permits.
 
-If you'd like to contribute to the development of Repo Reader, feel free to fork the repository and create a pull request. Please make sure to follow the standard JavaScript and Next.js best practices.
+If you'd like to contribute to the development of Repo Reader, feel free to fork the repository and create a pull request. If you have some new ideas, you can also create new issues and dicuss with other developers. Please make sure to follow the standard JavaScript and Next.js best practices.
