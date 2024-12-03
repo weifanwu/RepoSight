@@ -18,18 +18,19 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
 
   const handleFolderUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
-
+  
     const readmeFiles: UploadedFile[] = [];
     const filteredFiles = selectedFiles.filter((file) => {
       const isInNodeModules = file.webkitRelativePath.includes("node_modules");
       const isReadme = file.name.toLowerCase() === "readme.md";
-
-      if (isReadme && !isInNodeModules) {
+      const isInRoot = file.webkitRelativePath.split("/").length === 2; // Only root folder files have no subdirectories
+  
+      if (isReadme && isInRoot && !isInNodeModules) {
         readmeFiles.push(file);
       }
-      return !isInNodeModules && !isReadme;
+      return !isInNodeModules && (!isReadme || !isInRoot);
     });
-
+  
     const readFileContent = (file: File): Promise<string> =>
       new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -37,19 +38,19 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
         reader.onerror = () => reject(new Error("Failed to read file content"));
         reader.readAsText(file);
       });
-
+  
     try {
       const fileContents = await Promise.all(
         readmeFiles.map((file) => readFileContent(file as File))
       );
       setText(fileContents.join());
-
+  
       await handleFileSubmit(filteredFiles);
     } catch (error) {
       console.error("Error reading README files:", error);
       setUploadStatus("Error processing folder.");
     }
-  };
+  };  
 
   const handleFileSubmit = async (files: UploadedFile[]) => {
     setUploadStatus("Submitting files...");
