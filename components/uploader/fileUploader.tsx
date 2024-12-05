@@ -9,7 +9,7 @@ interface UploadedFile extends File {
 }
 
 interface FolderUploadProps {
-  onUploadComplete: (nodes: Node[], edges: Edge[]) => void;
+  onUploadComplete: (hierarchy: HierarchyNode) => void;
 }
 
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
@@ -70,7 +70,7 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
           tree.set(key, new Set(value));
         }
         setTree(tree);
-        onUploadComplete(data.nodesAndEdges["nodes"], data.nodesAndEdges["edges"]);
+        onUploadComplete(data.hierarchy);
         setUploadStatus("Files uploaded successfully!");
       } else {
         setUploadStatus("Failed to upload files.");

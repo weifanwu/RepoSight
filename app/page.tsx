@@ -1,15 +1,14 @@
 "use client";
 // import { useTree } from "@/context/treeContext";
 import FolderUpload from "@/components/uploader/fileUploader";
-import Diagram from "@/components/flow_diagram/diagram";
+import CollapsibleTree from "@/components/flow_diagram/tree";
 // import ApiKeyPopup from "@/components/openai/apiKeyPopup";
 import { Node, Edge } from "@xyflow/react";
 import React, { useState } from "react";
 import Navbar from "@/components/navbar/navbar";
 
 const Page: React.FC = () => {
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
+  const [hierarchy, setHierarchy] = useState<HierarchyNode>();
   // const { apiKey } = useTree();
 
   const handleSearch = () => {
@@ -21,9 +20,8 @@ const Page: React.FC = () => {
     console.log("downloading...");
   };
 
-  const handleUploadComplete = (uploadedNodes: Node[], uploadedEdges: Edge[]) => {
-    setNodes(uploadedNodes);
-    setEdges(uploadedEdges);
+  const handleUploadComplete = (hierarchy: HierarchyNode) => {
+    setHierarchy(hierarchy);
   };
 
 
@@ -35,7 +33,7 @@ const Page: React.FC = () => {
         <>
         <Navbar onSearch={handleSearch} onDownload={handleDownload} />
         <FolderUpload onUploadComplete={handleUploadComplete} />
-        <Diagram initialNodes={nodes} initialEdges={edges} />
+        <Diagram hierarchy={hierarchy} />
         </>
       {/* )} */}
     </div>

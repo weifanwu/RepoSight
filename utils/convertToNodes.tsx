@@ -1,63 +1,65 @@
-import { MarkerType, Node, Edge } from '@xyflow/react';
-
-export function convertFilesToNodesAndEdges(files: string[]): { nodes: Node[]; edges: Edge[]; serializableTree: [string, string[]][] } {
-  const nodes: Node[] = [];
-  const edges: Edge[] = [];
-  const nodeIds = new Set<string>();
-  let yOffset = 0;
+export function convertFilesToHierarchyWithTree(
+  files: string[]
+): { hierarchy: HierarchyNode; serializableTree: [string, string[]][] } {
   const tree: Map<string, Set<string>> = new Map();
 
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    const pathParts = file.split('/');
-  
-    if (pathParts.some((part) => part.startsWith('.') || part === 'node_modules')) {
-      continue;
-    }
-  
-    for (let index = 0; index < pathParts.length; index++) {
-      const part = pathParts[index];
-      const nodeId = pathParts.slice(0, index + 1).join('/');
-      if (!tree.has(part)) {
-        tree.set(part, new Set<string>());
-      }
-      
-      const children = pathParts.slice(index + 1);
-      children.forEach((child) => tree.get(part)!.add(child));
-      
-      if (!nodeIds.has(nodeId)) {
-        nodeIds.add(nodeId);
-  
-        const isFolder = index < pathParts.length - 1;
-        const label = isFolder ? `Folder: ${part}` : `File: ${part}`;
-  
-        const node: Node = {
-          id: nodeId,
-          data: { label },
-          position: { x: index * 200, y: yOffset },
-          type: isFolder ? 'default' : 'output',
-        };
-  
-        nodes.push(node);
-  
-        if (index > 0) {
-          const parentId = pathParts.slice(0, index).join('/');
-          edges.push({
-            id: `e-${parentId}-${nodeId}`,
-            source: parentId,
-            target: nodeId,
-            animated: true,
-            markerEnd: { type: MarkerType.Arrow },
-          });
-        }
-        yOffset += 100;
-      }
-    }
-  }
+  // Helper function to build the tree structure
+  const buildHierarchy = (paths: string[]): { [key: string]: any } => {
+    const root: any = {};
 
+    for (const path of paths) {
+      const parts = path.split('/');
+      if (parts.some((part) => part.startsWith('.') || part === 'node_modules')) {
+        continue; // Ignore hidden files and node_modules
+      }
+      let currentLevel = root;
+      let parent = '';
+      for (const part of parts) {
+        const currentPath = parent ? `${parent}/${part}` : part;
+        parent = currentPath;
+
+        if (!tree.has(parent)) {
+          tree.set(parent, new Set());
+        }
+
+        if (!currentLevel[part]) {
+          currentLevel[part] = {};
+        }
+        currentLevel = currentLevel[part];
+      }
+
+      // Update the tree structure
+      parts.forEach((_, i) => {
+        const parentPath = parts.slice(0, i).join('/');
+        const child = parts[i];
+        if (parentPath && child) {
+          if (!tree.has(parentPath)) {
+            tree.set(parentPath, new Set());
+          }
+          tree.get(parentPath)!.add(child);
+        }
+      });
+    }
+
+    return root;
+  };
+
+  // Recursive function to convert the tree structure into D3-compatible format
+  const transformToD3Format = (node: any, name: string): any => {
+    const children = Object.entries(node).map(([key, value]) => transformToD3Format(value, key));
+    return children.length > 0 ? { name, children } : { name };
+  };
+
+  // Build the tree structure
+  const hierarchyTree = buildHierarchy(files);
+
+  // Convert to D3-compatible hierarchy
+  const hierarchy = transformToD3Format(hierarchyTree, 'root');
+
+  // Convert the `tree` map to serializable format
   const serializableTree: [string, string[]][] = Array.from(tree.entries()).map(
     ([key, value]) => [key, Array.from(value)]
   );
 
-  return { nodes, edges, serializableTree};
+  return { hierarchy, serializableTree };
 }

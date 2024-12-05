@@ -2,6 +2,10 @@ import React from "react";
 
 declare global {
   type Tree = Map<string, Set<string>>;
+  type HierarchyNode = {
+    name: string;
+    children?: HierarchyNode[];
+  };
 }
 
 declare module "react" {

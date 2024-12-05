@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { convertFilesToNodesAndEdges } from '@/utils/convertToNodes';
+import { convertFilesToHierarchyWithTree } from '@/utils/convertToNodes';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,8 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: "No file paths provided" }, { status: 400 });
     }
 
-    const nodesAndEdges = convertFilesToNodesAndEdges(filePaths);
-
+    const nodesAndEdges = convertFilesToHierarchyWithTree(filePaths);
     return NextResponse.json({
       message: 'Files uploaded successfully',
       nodesAndEdges: nodesAndEdges,
