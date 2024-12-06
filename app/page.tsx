@@ -1,9 +1,8 @@
 "use client";
 // import { useTree } from "@/context/treeContext";
 import FolderUpload from "@/components/uploader/fileUploader";
-import CollapsibleTree from "@/components/flow_diagram/tree";
+import CollapsibleTree from "@/components/flow_diagram/d3CollapsibleTree";
 // import ApiKeyPopup from "@/components/openai/apiKeyPopup";
-import { Node, Edge } from "@xyflow/react";
 import React, { useState } from "react";
 import Navbar from "@/components/navbar/navbar";
 
@@ -33,7 +32,7 @@ const Page: React.FC = () => {
         <>
         <Navbar onSearch={handleSearch} onDownload={handleDownload} />
         <FolderUpload onUploadComplete={handleUploadComplete} />
-        <Diagram hierarchy={hierarchy} />
+        <CollapsibleTree hierarchy={hierarchy} />
         </>
       {/* )} */}
     </div>

@@ -70,7 +70,7 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
           tree.set(key, new Set(value));
         }
         setTree(tree);
-        onUploadComplete(data.hierarchy);
+        onUploadComplete(data.nodesAndEdges.hierarchy);
         setUploadStatus("Files uploaded successfully!");
       } else {
         setUploadStatus("Failed to upload files.");
