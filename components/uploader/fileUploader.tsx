@@ -1,8 +1,7 @@
 "use client";
 import { useState, ChangeEvent } from "react";
-import { Node, Edge } from "@xyflow/react";
 import FolderInput from "./folderInput";
-import { useTree } from "@/context/treeContext";
+import { useFileTree } from "@/context/treeContext";
 
 interface UploadedFile extends File {
   webkitRelativePath: string;
@@ -14,7 +13,7 @@ interface FolderUploadProps {
 
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [uploadStatus, setUploadStatus] = useState<string>("");
-  const { setTree, setText } = useTree();
+  const { setFileTree, setReadme } = useFileTree();
 
   const handleFolderUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(event.target.files || []) as UploadedFile[];
@@ -43,7 +42,7 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       const fileContents = await Promise.all(
         readmeFiles.map((file) => readFileContent(file as File))
       );
-      setText(fileContents.join());
+      setReadme(fileContents.join());
   
       await handleFileSubmit(filteredFiles);
     } catch (error) {
@@ -65,11 +64,11 @@ export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
       if (response.ok) {
         const data = await response.json();
         const serializableTree = data.nodesAndEdges.serializableTree;
-        const tree: Tree = new Map();
+        const tree: FileTree = new Map();
         for (const [key, value] of serializableTree) {
           tree.set(key, new Set(value));
         }
-        setTree(tree);
+        setFileTree(tree);
         onUploadComplete(data.nodesAndEdges.hierarchy);
         setUploadStatus("Files uploaded successfully!");
       } else {

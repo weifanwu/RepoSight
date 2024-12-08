@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useTree } from "@/context/treeContext";
+import { useFileTree } from "@/context/treeContext";
 
 const ApiKeyPopup: React.FC = () => {
-  const { setApiKey } = useTree();
+  const { setApiKey } = useFileTree();
   const [key, setKey] = useState("");
 
   const handleSave = () => {
