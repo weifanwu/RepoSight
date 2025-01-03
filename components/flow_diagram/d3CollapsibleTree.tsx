@@ -8,6 +8,7 @@ interface AppProps {
   hierarchy?: HierarchyNode;
 }
 
+// React component for rendering a collapsible tree diagram using D3
 const App: React.FC<AppProps> = ({ hierarchy }) => {
   const treeRef = useRef<HTMLDivElement>(null);
 

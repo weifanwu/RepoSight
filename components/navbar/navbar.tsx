@@ -5,6 +5,7 @@ interface NavbarProps {
   onDownload: () => void;
 }
 
+// React component for the navigation bar with search and download functionalities
 const Navbar: React.FC<NavbarProps> = ({ onSearch, onDownload }) => {
   const [searchQuery, setSearchQuery] = useState("");
 

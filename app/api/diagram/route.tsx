@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { convertFilesToHierarchyWithTree } from '@/utils/convertToNodes';
 
+// Handles POST requests to convert file paths to a hierarchy and return nodes and edges
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

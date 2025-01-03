@@ -16,6 +16,7 @@ interface OpenAIRequestBody {
   model?: string;
 }
 
+// Handles POST requests to process OpenAI prompts and cache responses
 export async function POST(req: Request) {
   try {
     const body: OpenAIRequestBody = await req.json();

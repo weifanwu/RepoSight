@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useFileTree } from "@/context/treeContext";
 
+// React component for entering and saving OpenAI API key
 const ApiKeyPopup: React.FC = () => {
   const { setApiKey } = useFileTree();
   const [key, setKey] = useState("");

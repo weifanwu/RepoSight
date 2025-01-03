@@ -5,6 +5,7 @@ interface FolderInputProps {
   FolderInputStatus?: string;
 }
 
+// React component for folder input handling
 const FolderInput: React.FC<FolderInputProps> = ({
   handleFolderUpload,
   FolderInputStatus,
