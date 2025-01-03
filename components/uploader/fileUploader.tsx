@@ -11,6 +11,7 @@ interface FolderUploadProps {
   onUploadComplete: (hierarchy: HierarchyNode) => void;
 }
 
+// React component for managing folder uploads and processing files
 export default function FolderUpload({ onUploadComplete }: FolderUploadProps) {
   const [uploadStatus, setUploadStatus] = useState<string>("");
   const { setFileTree, setReadme } = useFileTree();
