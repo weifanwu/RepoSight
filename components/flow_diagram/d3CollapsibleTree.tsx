@@ -94,13 +94,13 @@ const App: React.FC<AppProps> = ({ hierarchy }) => {
         .on("click", (event, d) => {
           const svgRect = (event.target as SVGElement).getBoundingClientRect();
           const x = svgRect.left;
-          const y = svgRect.top;
+          const y = svgRect.top + window.scrollY;
           const fileName = d.data.name || "No text available";
           setLoading(true);
           setPopupData({ x, y });
           const children = [...(fileTree.get(fileName) || [])].join(" ");
           const prompt = JSON.stringify({
-            prompt: `Use the information below to infer the functionality of this folder called: "${fileName}" in one paragraph, limited to 100 words. Readme file: ${readme}, children files and folder names: ${children}.`,
+            prompt: `you are a repo reader use below information to summary what does this folder called: "${fileName}" do in one paragraph, limited to 100 words. Readme file: ${readme}, children files and folder names: ${children}.`,
           });
 
           fetch("/api/ai/reader", {
@@ -187,7 +187,7 @@ const App: React.FC<AppProps> = ({ hierarchy }) => {
         <div
           style={{
             position: "absolute",
-            top: popupData.y,
+            top: popupData.y + 430,
             left: popupData.x,
             transform: "translate(-50%, -100%)",
             backgroundColor: "#fff",
