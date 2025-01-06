@@ -138,12 +138,6 @@ const App: React.FC<AppProps> = ({ hierarchy }) => {
         .lower()
         .attr("stroke", "white");
 
-      const nodeUpdate = node.merge(nodeEnter).transition()
-        .duration(duration)
-        .attr("transform", d => `translate(${d.y},${d.x})`)
-        .attr("fill-opacity", 1)
-        .attr("stroke-opacity", 1);
-
       node.exit().transition()
         .duration(duration)
         .remove()
@@ -154,7 +148,7 @@ const App: React.FC<AppProps> = ({ hierarchy }) => {
       const link = gLink.selectAll("path").data(links, d => d.target.id);
 
       const linkEnter = link.enter().append("path")
-        .attr("d", d => {
+        .attr("d", () => {
           const o = { x: source.x0, y: source.y0 };
           return diagonal({ source: o, target: o });
         });
@@ -166,7 +160,7 @@ const App: React.FC<AppProps> = ({ hierarchy }) => {
       link.exit().transition()
         .duration(duration)
         .remove()
-        .attr("d", d => {
+        .attr("d", () => {
           const o = { x: source.x, y: source.y };
           return diagonal({ source: o, target: o });
         });
